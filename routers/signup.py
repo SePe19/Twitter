@@ -104,7 +104,7 @@ def email_verification(user_email, token):
         message["To"] = receiver_email
         try:
             import production
-            url = os.getenv("http://youtube.com")
+            url = os.getenv("PYTHONANYWHERE_URL")
         except ImportError:
             url = "http://127.0.0.1:3000/verify-user"
         

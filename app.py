@@ -4,15 +4,15 @@ import sqlite3
 import pathlib
 import dbconnection
 import os
- 
+
 @post("/secret_python_hook_url")
 def git_update():
-  repo = git.Repo("./Pythonanywhere-Homework")
-  origin = repo.remotes.origin
-  repo.create_head("main", origin.refs.main).set_tracking_branch(origin.refs.main).checkout()
-  origin.pull()
-  return "Everything OK"
- 
+    repo = git.Repo("./Pythonanywhere-Homework")
+    origin = repo.remotes.origin
+    repo.create_head("main", origin.refs.main).set_tracking_branch(origin.refs.main).checkout()
+    origin.pull()
+    return "Everything OK"
+
 ##############################
 @get("/images/<filename:re:.*\.webp>")
 def _(filename):
@@ -74,8 +74,8 @@ import routers.follow
 ##############################
 
 try:
-  import production
-  application = default_app()
+    import production
+    application = default_app()
 except Exception as ex:
-  print("Running local server")
-  run(host="127.0.0.1", port=3000, debug=True, reloader=True)
+    print("Running local server")
+    run(host="127.0.0.1", port=3000, debug=True, reloader=True)
