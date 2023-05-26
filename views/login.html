@@ -25,8 +25,8 @@
 
             <span class="text-white text-23 font-bold mt-4">Sign in to Twitter</span>
 
-            <input type="text" name="username_login" placeholder="Username"  class="rounded-md bg-transparent invalid:border-[#F4212E] text-white text-17 placeholder-twitter-grey outline-none group border border-twitter-line focus:border-twitter-blue py-4 p-2 mt-4 w-80">
-            <input type="password" name="password_login"  placeholder="Password" class="rounded-md bg-transparent invalid:border-[#F4212E] text-white text-17 placeholder-twitter-grey outline-none group border border-twitter-line focus:border-twitter-blue py-4 p-2 mt-4 w-80">
+            <input type="text" name="username_login" placeholder="Username"  class="login-enter rounded-md bg-transparent invalid:border-[#F4212E] text-white text-17 placeholder-twitter-grey outline-none group border border-twitter-line focus:border-twitter-blue py-4 p-2 mt-4 w-80">
+            <input type="password" name="password_login"  placeholder="Password" class="login-enter rounded-md bg-transparent invalid:border-[#F4212E] text-white text-17 placeholder-twitter-grey outline-none group border border-twitter-line focus:border-twitter-blue py-4 p-2 mt-4 w-80">
 
             <button onclick="login()" class="bg-twitter-blue text-white rounded-full px-6 py-2 font-semibold w-80 mt-4 mb-8 hover:bg-opacity-90">
                 Log in
@@ -45,12 +45,12 @@
     
         const modalLogin = document.getElementById("modal-login")
 
+        
         function loginModal() {
             const overlay = document.getElementById("overlay")
             modalLogin.classList.remove("hidden")
             overlay.classList.remove("hidden")
             document.body.style.overflow = "hidden";
-         
         }
 
         function closeLoginModal() {
@@ -63,7 +63,6 @@
             const username = document.querySelector("input[name='username_login']").value
             const password = document.querySelector("input[name='password_login']").value
             console.log("this is the username", username)
-           
             const formData = new FormData();
 
 
@@ -71,7 +70,7 @@
             formData.append('password', password);
             
             for (const value of formData.values()) {
-            console.log(value);
+                console.log(value);
             }
 
             const response = await fetch("/login", {

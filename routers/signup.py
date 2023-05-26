@@ -115,7 +115,7 @@ def email_verification(user_email, token):
         html = """\
         <html>
             <body>
-                <p>Hi and welcome to Twitter!,<br>
+                <p>Hi and welcome to Twitter!<br>
                     Thank you for signing up<br>
                     <a href="{url}/{token}">{url}/{token}</a>
                 </p>

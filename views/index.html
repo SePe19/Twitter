@@ -50,7 +50,7 @@
                         
                         <!-- tweet start -->
                         <div class="pt-3 w-11/12">
-                            <textarea id="lg_light_txt" name="message" class="text-20 text-twitter-light-grey w-full placeholder-twitter-grey bg-inherit outline-none" placeholder="What's happening?"></textarea>
+                            <input id="lg_light_txt" name="message" type="text" class="text-20 text-twitter-light-grey w-full placeholder-twitter-grey bg-inherit outline-none" placeholder="What's happening?"></input>
                             <img id="previewImage" class="hidden w-full" src="#" alt="Preview Image">
                             <!-- % include("tweet") -->
 
@@ -62,8 +62,8 @@
 
 
                                 <label>
-                                <input type="file" id="img" name="img" accept="image/*" class="hidden">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" stroke="" stroke-linecap="round" stroke-linejoin="round" d="M 3 5.5 C 3 4.119 4.119 3 5.5 3 h 13 C 19.881 3 21 4.119 21 5.5 v 13 c 0 1.381 -1.119 2.5 -2.5 2.5 h -13 C 4.119 21 3 19.881 3 18.5 v -13 Z M 5.5 5 c -0.276 0 -0.5 0.224 -0.5 0.5 v 9.086 l 3 -3 l 3 3 l 5 -5 l 3 3 V 5.5 c 0 -0.276 -0.224 -0.5 -0.5 -0.5 h -13 Z M 19 15.414 l -3 -3 l -5 5 l -3 -3 l -3 3 V 18.5 c 0 0.276 0.224 0.5 0.5 0.5 h 13 c 0.276 0 0.5 -0.224 0.5 -0.5 v -3.086 Z M 9.75 7 C 8.784 7 8 7.784 8 8.75 s 0.784 1.75 1.75 1.75 s 1.75 -0.784 1.75 -1.75 S 10.716 7 9.75 7 Z"/></svg>
+                                    <input type="file" id="img" name="img" accept="image/*" class="hidden">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" stroke="" stroke-linecap="round" stroke-linejoin="round" d="M 3 5.5 C 3 4.119 4.119 3 5.5 3 h 13 C 19.881 3 21 4.119 21 5.5 v 13 c 0 1.381 -1.119 2.5 -2.5 2.5 h -13 C 4.119 21 3 19.881 3 18.5 v -13 Z M 5.5 5 c -0.276 0 -0.5 0.224 -0.5 0.5 v 9.086 l 3 -3 l 3 3 l 5 -5 l 3 3 V 5.5 c 0 -0.276 -0.224 -0.5 -0.5 -0.5 h -13 Z M 19 15.414 l -3 -3 l -5 5 l -3 -3 l -3 3 V 18.5 c 0 0.276 0.224 0.5 0.5 0.5 h 13 c 0.276 0 0.5 -0.224 0.5 -0.5 v -3.086 Z M 9.75 7 C 8.784 7 8 7.784 8 8.75 s 0.784 1.75 1.75 1.75 s 1.75 -0.784 1.75 -1.75 S 10.716 7 9.75 7 Z"/></svg>
 
                                 <input class="hidden" type="submit">
                                 </label>
@@ -103,7 +103,7 @@
                                 </div>
                                 <!-- icons end -->
                                 
-                                <button id="button" class="text-15 font-bold px-4 py-1.5 rounded-full ml-auto text-twitter-light-grey bg-twitter-blue opacity-50">Tweet</button>                                                      
+                                <button id="tweetButton" name="tweetButton" onclick="tweet()" class="text-15 font-bold px-4 py-1.5 rounded-full ml-auto text-twitter-light-grey bg-twitter-blue opacity-50">Tweet</button>
                             </div>
                         </div>
                         <!-- tweet end -->
@@ -169,8 +169,7 @@
                             <!-- username + data end -->
                             <div>
                             <!-- tweet message start -->
-                            <p id="sm_light_txt" class="text-15 text-twitter-light-grey word-wrap">{{user_and_tweet["tweet_message"]}}</p>
-                            <!-- tweet message end -->
+                            <p id="sm_light_txt" class="text-15 text-twitter-light-grey word-wrap">{{user_and_tweet["tweet_message"]}}</p>                            <!-- tweet message end -->
                             % if user_and_tweet["tweet_image"]:
                             <!-- tweet image start -->
                             <div class="pt-3 pb-1">
@@ -248,46 +247,56 @@
         </div>
     </div>
 
-    <script>
-        const imageInput = document.getElementById('img');
-        const previewImage = document.getElementById('previewImage');
-
+<script>
+    const imageInput = document.getElementById('img');
+    const previewImage = document.getElementById('previewImage');
+    const tweetButton = document.getElementById("tweetButton");
+    if (imageInput) {
         imageInput.addEventListener('change', (event) => {
-        const file = event.target.files[0];
-
-        if (file) {
-            const reader = new FileReader();
-
-        reader.addEventListener('load', (readerEvent) => {
-        previewImage.src = readerEvent.target.result;
-        previewImage.classList.remove('hidden');
-            });
-
-        reader.readAsDataURL(file);
-        } else {
-        previewImage.src = '#';
-        previewImage.classList.add('hidden');
-        }
+            const file = event.target.files[0];
+            
+            if (file) {
+                const reader = new FileReader();
+                
+                reader.addEventListener('load', (readerEvent) => {
+                    tweetButton.classList.remove("opacity-50")
+                    previewImage.src = readerEvent.target.result;
+                    previewImage.classList.remove('hidden');
+                });
+                
+                reader.readAsDataURL(file);
+            } else {
+                previewImage.src = '#';
+                previewImage.classList.add('hidden');
+            }
         }); 
-
-
-        async function tweet(){
-        const message = document.querySelector("textarea[name='message']").value
+        
+        const message = document.querySelector("input[name='message']");
+        message.addEventListener("keypress", function() {
+            tweetButton.classList.remove("opacity-50");
+        })
+    }
+        
+    async function tweet(){
+        const message = document.querySelector("input[name='message']").value
+        const picture = document.querySelector("input[name='img']").files[0]
+        console.log("picture name", picture)
         console.log(message, "This is our tweet message")
         const formData = new FormData();
         
         formData.append("tweet_message", message);
+        formData.append("picture", picture);
 
         const response = await fetch("/tweet", {
-                method: "POST", 
-                body: formData
-            })
-            
-            const data = await response.json()
-            console.log("This is the data", data)
-
-        }
-    </script>
+            method: "POST", 
+            body: formData
+        })
+        
+        const data = await response.json()
+        console.log("This is the data", data)
+        window.location.reload()
+    }
+</script>
 
 <script src="/js/time.js"></script>
 <script src="/js/numbers.js"></script>

@@ -69,7 +69,6 @@ def update():
     user_cookie['user_name'] = new_username
     print("new username cookie value", user_cookie['user_name'])
     response.set_cookie("user", user_cookie, secret=os.getenv('MY_SECRET'), httponly=True)
-    
     return {"info": "Update succesful", "New username": user_cookie["user_name"]}
 
   except Exception as ex:

@@ -274,8 +274,8 @@
             </div>
     </section>
 
-    <script>
-        const modalUpdate = document.getElementById("modal-update")
+<script>
+    const modalUpdate = document.getElementById("modal-update")
 
     function updateModal() {
         const overlay = document.getElementById("overlay")
@@ -291,8 +291,6 @@
     }
 
     async function update(){
-        let userEdit = document.querySelector("input[name='user_edit']").value
-        console.log(userEdit, "kevin er glad for det her")
         const username = document.querySelector("input[name='username_update']").value
         const formData = new FormData();
         console.log(username, "her er bruger")
@@ -302,7 +300,7 @@
             console.log(value);
         }
 
-        const response = await fetch(`/${userEdit}`, {
+        const response = await fetch("/update", {
             method: "PUT", 
             body: formData
         })
@@ -311,15 +309,13 @@
         console.log("This is the data", data)
 
         closeUpdateModal()
-
-        window.location.reload();
+        window.location.href= "/" + username
     }
 
     function follow() {
         const followee_id = document.getElementById("followButton").value
-        console.log(followee_id)
     }
-    </script>
+</script>
 
 <script src="/js/time.js"></script>
 <script src="/js/numbers.js"></script>

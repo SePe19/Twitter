@@ -26,6 +26,10 @@ def _(filename):
 def _(filename):
     return static_file(filename, root="./images")
 
+@get("/images/<filename:re:.*\.gif>")
+def _(filename):
+    return static_file(filename, root="./images")
+
 
 @get("/")
 def index():

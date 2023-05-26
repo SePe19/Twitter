@@ -36,6 +36,7 @@ SELECT name FROM sqlite_master WHERE type = 'trigger';
 
 DELETE FROM users WHERE user_email = "frederik.hbraad@gmail.com";
 DELETE FROM users WHERE user_email = "mrsepe19@gmail.com";
+DELETE FROM users WHERE user_email = "seb19@live.dk";
 
 
 -- ##############################

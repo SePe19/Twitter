@@ -135,7 +135,7 @@ def picture():
   print("NAME? ", name)
   print("FILENAME ", ext)
 
-  if ext not in (".png", ".jpg", "jpeg"):
+  if ext not in (".png", ".jpg", ".jpeg", ".webp", ".gif"):
     response.status = 400
     raise Exception(error)
   picture_name = str(uuid.uuid4().hex)
